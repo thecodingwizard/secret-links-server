@@ -1,11 +1,4 @@
 import * as express from "express";
-import * as https from "https";
-import * as fs from "fs";
-
-const httpsOptions = {
-	key: fs.readFileSync('./keys/key.pem'),
-	cert: fs.readFileSync('./keys/cert.pem')
-};
 
 const app = express();
 app.set("port", (process.env.PORT || 3000));
@@ -21,9 +14,7 @@ app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
-const server = https.createServer(httpsOptions, app);
-
-server.listen(app.get("port"), () => console.log(`Server listening on port ${app.get("port")}`));
+app.listen(app.get("port"), () => console.log(`Server up`));
 
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
