@@ -1,9 +1,12 @@
 import * as express from "express";
 
-const router = express.Router();
+export default function(db) {
+	const router = express.Router();
 
-router.get("/test", (req, res) => {
-	res.send("Hello!");
-});
+	router.post("/:accessUrl", (req, res) => {
+		const accessUrl = req.params.accessUrl;
+		const data = req.body.data;
+	});
 
-export default router;
+	return router;
+}
