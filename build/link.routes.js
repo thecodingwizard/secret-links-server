@@ -17,7 +17,7 @@ function default_1(db) {
             res.status(201).send("OK");
         });
     });
-    router.post("/:accessUrl", (req, res) => {
+    router.get("/:accessUrl", (req, res) => {
         const { accessUrl } = req.params;
         db.collection("links").find({ accessUrl }).toArray((err, docs) => {
             if (err) {
