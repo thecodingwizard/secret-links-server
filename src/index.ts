@@ -24,6 +24,7 @@ mongodb.MongoClient.connect(mongodbURL, (err, client) => {
 	const db = client.db();
 	console.log("[Database] Connection ready");
 	
+	db.collection("links").createIndex("accessUrl", { unique: true });
 	app.use("/links", linkRoutes(db));
 	
 	app.listen(app.get("port"), () => console.log(`Server up`));

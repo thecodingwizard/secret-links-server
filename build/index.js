@@ -21,6 +21,7 @@ mongodb.MongoClient.connect(mongodbURL, (err, client) => {
     // Save database object from the callback for reuse.
     const db = client.db();
     console.log("[Database] Connection ready");
+    db.collection("links").createIndex("accessUrl", { unique: true });
     app.use("/links", link_routes_1.default(db));
     app.listen(app.get("port"), () => console.log(`Server up`));
 });
