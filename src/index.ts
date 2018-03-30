@@ -1,4 +1,5 @@
 import * as express from "express";
+import linkRoutes from "./link.routes";
 
 const app = express();
 app.set("port", (process.env.PORT || 3000));
@@ -10,9 +11,7 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.get("/", (req, res) => {
-	res.send("Hello World!");
-});
+app.use("/links", linkRoutes);
 
 app.listen(app.get("port"), () => console.log(`Server up`));
 
