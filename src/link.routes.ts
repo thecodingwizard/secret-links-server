@@ -21,7 +21,7 @@ export default function(db) {
 		});
 	});
 
-	router.post("/:accessUrl", (req, res) => {
+	router.get("/:accessUrl", (req, res) => {
 		const { accessUrl } = req.params;
 
 		db.collection("links").find({ accessUrl }).toArray((err, docs) => {
