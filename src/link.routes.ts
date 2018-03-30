@@ -5,12 +5,11 @@ import { Link, EncryptedLink } from "./link";
 export default function(db) {
 	const router = express.Router();
 
-	router.post("/:accessUrl", (req, res) => {
-		const accessUrl = req.params.accessUrl;
-		const data = req.body.data;
+	router.post("/", (req, res) => {
+		const { data, accessUrl } = req.body;
 
-		if (!data) {
-			return handleError(res, "Data cannot be null.", 400);
+		if (!data || !accessUrl) {
+			return handleError(res, "AccessUrl and Data are required.", 400);
 		}
 
 		const link: EncryptedLink = { accessUrl, data };
@@ -19,6 +18,25 @@ export default function(db) {
 				return handleError(res, "Failed to insert link: " + err);
 			}
 			res.status(201).send("OK");
+		});
+	});
+
+	router.post("/:accessUrl", (req, res) => {
+		const { accessUrl } = req.params;
+		const { password } = req.body;
+
+		if (!password) {
+			return handleError(res, "Password is required.", 400);
+		}
+
+		db.collection("links").find({ accessUrl }).toArray((err, docs) => {
+			if (err) {
+				return handleError(res, "Failed to get link: " + err);
+			}
+			if (docs.length < 1) {
+				return handleError(res, "Link not found.", 404);
+			}
+			res.json(docs[0]);
 		});
 	});
 
