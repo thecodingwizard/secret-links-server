@@ -19,10 +19,6 @@ function default_1(db) {
     });
     router.post("/:accessUrl", (req, res) => {
         const { accessUrl } = req.params;
-        const { password } = req.body;
-        if (!password) {
-            return utils_1.handleError(res, "Password is required.", 400);
-        }
         db.collection("links").find({ accessUrl }).toArray((err, docs) => {
             if (err) {
                 return utils_1.handleError(res, "Failed to get link: " + err);

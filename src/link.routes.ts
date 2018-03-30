@@ -23,11 +23,6 @@ export default function(db) {
 
 	router.post("/:accessUrl", (req, res) => {
 		const { accessUrl } = req.params;
-		const { password } = req.body;
-
-		if (!password) {
-			return handleError(res, "Password is required.", 400);
-		}
 
 		db.collection("links").find({ accessUrl }).toArray((err, docs) => {
 			if (err) {
