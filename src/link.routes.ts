@@ -18,7 +18,9 @@ export default function(db) {
 			if (err) {
 				return handleError(res, "Failed to insert link: " + err);
 			}
-			res.status(201).send("OK");
+			res.status(201).json({
+				message: "OK"
+			});
 		});
 	});
 
