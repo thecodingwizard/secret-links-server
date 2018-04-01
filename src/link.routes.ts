@@ -16,6 +16,9 @@ export default function(db) {
 		const link: EncryptedLink = { accessUrl, data };
 		db.collection("links").insertOne(link, (err, doc) => {
 			if (err) {
+				if (err.indexOf("duplicate key error index:") !== -1) {
+					return handleError(res, "Access URL taken.");
+				}
 				return handleError(res, "Failed to insert link: " + err);
 			}
 			res.status(201).json({
