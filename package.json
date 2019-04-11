@@ -1,16 +1,12 @@
 {
-  "name": "virtualstocks.io-gcp",
+  "name": "secret-links-server",
   "version": "1.0.0",
-  "description": "A polling app for virtualstocks.io that polls market data",
+  "description": "Server for Secret Links",
   "main": "build/index.js",
   "scripts": {
     "build": "./node_modules/.bin/tsc",
     "start": "./node_modules/.bin/tsc && node build/index.js",
     "postinstall": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/virtualstocks/virtualstocks.io-gcp"
   },
   "dependencies": {
     "@types/node": "^9.4.6",
